@@ -23,18 +23,18 @@ from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 
 LINEAR_VEL = 0.22
-STOP_DISTANCE = 0.3
+STOP_DISTANCE = 0.4
 LIDAR_ERROR = 0.05
 SAFE_STOP_DISTANCE = STOP_DISTANCE + LIDAR_ERROR
-LIMIT_RANGE=2
+LIMIT_RANGE = 2.0
 
 class Obstacle():
     def __init__(self):
-        self._cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
+        self._cmd_pub = rospy.Publisher('/locobot/mobile_base/commands/velocity', Twist, queue_size=1)
         self.obstacle()
         
     def get_scan(self):
-        scan = rospy.wait_for_message('scan', LaserScan)
+        scan = rospy.wait_for_message('locobot/scan', LaserScan)
         scan_filter = []
        
         samples = len(scan.ranges)  # The number of samples is defined in 
@@ -47,7 +47,6 @@ class Obstacle():
 
         if samples_view is 1:
             scan_filter.append(scan.ranges[0])
-
         else:
             left_lidar_samples_ranges = -(samples_view//2 + samples_view % 2)
             right_lidar_samples_ranges = samples_view//2
@@ -57,8 +56,8 @@ class Obstacle():
             scan_filter.extend(left_lidar_samples + right_lidar_samples)
 
         for i in range(samples_view):
-            if scan_filter[i] == float('Inf') or scan_filter[i] == 0 or scan_filter[i] > LIMIT_RANGE :
-                scan_filter[i] = LIMIT_RANGE
+            if scan_filter[i] == float('Inf') or scan_filter[i] > 2:
+                scan_filter[i] = 2.0
             elif math.isnan(scan_filter[i]):
                 scan_filter[i] = 0
         
@@ -87,7 +86,7 @@ class Obstacle():
                 rospy.loginfo('Distance of the obstacle : %f', min_distance)
 
 def main():
-    rospy.init_node('turtlebot3_obstacle')
+    rospy.init_node('locobot_obstacle')
     try:
         obstacle = Obstacle()
     except rospy.ROSInterruptException:
