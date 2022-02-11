@@ -88,7 +88,7 @@ class GotoPoint():
             move_cmd.angular.z = angular_speed * path_angle-rotation
 
             distance = sqrt(pow((goal_x - x_start), 2) + pow((goal_y - y_start), 2))
-            move_cmd.linear.x = min(linear_speed * distance, 0.1)
+            move_cmd.linear.x = min(linear_speed * distance, 0.2)
 
             if move_cmd.angular.z > 0:
                 move_cmd.angular.z = min(move_cmd.angular.z, 1.5)
