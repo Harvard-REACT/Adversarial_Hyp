@@ -17,7 +17,7 @@ pip install Cython setuptools numpy pybind11 scipy pandas matplotlib
 
 echo "Installing WSR Toolbox"
 cd ~/
-mkdir -p cs286_hack_ws2/src
+mkdir -p cs286_hack_ws/src
 cd ~/cs286_hack_ws/src
 git clone https://github.com/Harvard-REACT/WSR-Toolbox-cpp.git
 cd WSR-Toolbox-cpp
