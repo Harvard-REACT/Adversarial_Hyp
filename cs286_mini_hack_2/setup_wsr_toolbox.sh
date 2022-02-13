@@ -27,3 +27,5 @@ python setup.py build_ext --inplace
 source ~/.bashrc
 
 cd ~/
+
+echo "All Packages are Installed."
