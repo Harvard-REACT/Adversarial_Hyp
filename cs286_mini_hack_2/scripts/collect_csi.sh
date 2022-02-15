@@ -6,19 +6,13 @@
 #$4 remote bot tx1 ip
 #$5 remote bot tx2
 #$6 remote bot tx2 username
-#$7 remote bot tx2 ip
-#$8 remote bot tx3
-#$9 remote bot tx3 username
-#$10 remote bot tx3 ip
-#$11 remote bot tx4 
-#$12 remote bot tx4 username
-#$13 remote bot tx4 ip
-#$14 remote bot tx5 
-#$15 remote bot tx4 username
-#$16 remote bot tx4 ip
 
 
 dir_path="${HOME}/Harvard_CS286/cs286_mini_hack_2/"
+
+#Remove old data
+rm -rf $dir_path/csi_rx1.dat
+rm -rf $dir_path/csi_tx1.dat
 
 #Get data from RX SAR Robot
 scp -r $1@$2:~/Harvard_CS286/cs286_mini_hack_2/csi_rx1.dat $dir_path/
