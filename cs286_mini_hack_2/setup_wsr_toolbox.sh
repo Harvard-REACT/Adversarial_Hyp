@@ -22,8 +22,12 @@ cd ~/cs286_hack_ws/src
 git clone https://github.com/Harvard-REACT/WSR-Toolbox-cpp.git
 cd WSR-Toolbox-cpp
 git checkout wsr-melodic
-catkin build
 python setup.py build_ext --inplace
+
+echo "Building workspace"
+cd ~/cs286_hack_ws/
+catkin build
+echo "source ~/cs286_hack_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 cd ~/
