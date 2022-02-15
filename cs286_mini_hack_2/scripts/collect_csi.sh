@@ -32,8 +32,8 @@ sleep 1
 #Store as backup with timestamp
 echo 'Copying file to back up folder'
 timestamp=$(date "+%Y-%m-%d_%H%M%S")
-cp $dir_path/csi_rx1.dat $dir_path/backup_data/csi_rx1_$timestamp.dat
-cp $dir_path/csi_tx1.dat $dir_path/backup_data/csi_tx1_$timestamp.dat
+#cp $dir_path/csi_rx1.dat $dir_path/backup_data/csi_rx1_$timestamp.dat
+#cp $dir_path/csi_tx1.dat $dir_path/backup_data/csi_tx1_$timestamp.dat
 #cp $dir_path/rx_trajectory.csv $dir_path/traj_backup_data/rx_trajectory_${timestamp}_.csv
 #cp $dir_path/t265_rx_trajectory.csv $dir_path/traj_backup_data/t265_rx_trajectory_${timestamp}_.csv;
 #cp $dir_path/odom_rx_trajectory.csv $dir_path/traj_backup_data/odom_rx_trajectory_${timestamp}_.csv;
