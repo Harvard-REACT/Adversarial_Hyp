@@ -14,12 +14,11 @@ dir_path="${HOME}/Harvard_CS286/cs286_mini_hack_2/"
 rm -rf $dir_path/csi_rx1.dat
 rm -rf $dir_path/csi_tx1.dat
 
-#Get data from RX SAR Robot
-scp -r $1@$2:~/Harvard_CS286/cs286_mini_hack_2/csi_rx1.dat $dir_path/
-
-
 #Get data from TX Robot
-scp -r $3@$4:~/Harvard_CS286/cs286_mini_hack_2/csi_tx1.dat $dir_path/
+scp -r $3@$4:~/Harvard_CS286/cs286_mini_hack_2/csi_tx1.dat $dir_path/ &
+
+#Get data from RX SAR Robot
+scp -r $1@$2:~/Harvard_CS286/cs286_mini_hack_2/{csi_rx1.dat, rx_displacement_odom.csv, rx_displacement_t265.csv} $dir_path/ 
 
 sleep 1
 

@@ -6,12 +6,13 @@ import subprocess
 import time
 import argparse
 
-class CSI_Tester_Robot:
+class CSI_Tester:
     def __init__ (self, robot_un, robot_ip, tx_un, tx_ip, packet_len, ts=3):
         self.pub = rospy.Publisher('verify_csi', Bool, queue_size=10)
         self.sub = rospy.Subscriber('run_test_1', Bool, self.callback)
         self.verify_csi_data = Bool()
         self.verify_csi_data.data = True
+        self.move_robot = Bool()
         rospy.init_node('csi_online_data_test1', anonymous=True)
 
         self.robot_username=robot_un
@@ -36,10 +37,15 @@ class CSI_Tester_Robot:
 
             #Wait for 5 seconds to collect data
             rospy.loginfo("Collecting data..")
-
             #Trigger robot motion
+            self.move_robot.data = True
+            self.pub.publish(self.move_robot)
 
             time.sleep(self.data_collection_time) 
+            
+            #Stop robot motion
+            self.move_robot.data = False
+            self.pub.publish(self.move_robot)
             
             #Stop remote csi
             subprocess.call(['bash', './stop_remote_csi.sh', 

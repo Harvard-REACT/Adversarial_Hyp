@@ -2,8 +2,6 @@
 
 import rospy
 from std_msgs.msg import Bool
-import subprocess
-import time
 import argparse
 from nav_msgs.msg import Odometry
 import csv
@@ -14,25 +12,27 @@ class CSI_Tester_Robot:
     def __init__ (self, odom_topic, velocity_topic, motion="linear"):
         self.sub_odom = rospy.Subscriber(odom_topic, Odometry, self.odom_callback)
         self.sub_t265 = rospy.Subscriber('/camera/odom/sample', Odometry, self.t265_callback)
-	self.sub = rospy.Subscriber('run_test_2', Bool, self.callback)
-	self.pub_vel = rospy.Publisher(velocity_topic, Twist, queue_size=10)
-	self.vel = Twist()
+        self.sub = rospy.Subscriber('run_test_2', Bool, self.callback)
+        self.pub_vel = rospy.Publisher(velocity_topic, Twist, queue_size=10)
+        self.vel = Twist()
         self.start_data_collection = False
-	self.motion = motion
+        self.motion = motion
         rospy.init_node('collect_robot_data', anonymous=True)
         rospy.loginfo("Waiting for new request...")
         self.odom_displacement=[]
         self.t265_displacement=[]
-	self.home_dir = os.path.expanduser('~')
+        self.home_dir = os.path.expanduser('~')
         rospy.spin()
 
     def odom_callback(self,msg):
         if (self.start_data_collection):
-	    if(self.motion == "linear"):
-		self.vel.linear.x=0.1
-	    else:
-		self.vel.angular.z=0.1
-	    self.pub_vel.publish(self.vel)
+            
+            if(self.motion == "linear"):
+                self.vel.linear.x=0.1
+            else:
+                self.vel.angular.z=0.1
+            
+            self.pub_vel.publish(self.vel)
             temp=[]
             temp.append(msg.header.stamp.secs)
             temp.append(msg.header.stamp.nsecs)
@@ -75,9 +75,11 @@ class CSI_Tester_Robot:
 
     def callback(self, msg):
         if msg.data:
-	    print("Got new request")
+            print("Got new request")
             self.start_data_collection = True
         else:
+            self.start_data_collection = False
+            self.pub_vel.publish(Twist())
             with open(self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/rx_displacement_odom.csv','w') as f:
                 write = csv.writer(f)
                 write.writerows(self.odom_displacement)
@@ -88,14 +90,17 @@ class CSI_Tester_Robot:
 
             self.odom_displacement=[]
             self.t265_displacement=[]
-	    print("Collected robot displacement data.")
-	    print("Waiting for new request")
-            #close(self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/rx_displacement_odom.csv')
-            #close(self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/rx_displacement_t265.csv')
-
+            print("Collected robot displacement data.")
+            print("Waiting for new request")
+            
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Get the inputs.')
+    parser.add_argument('--position_topic', type=str)
+    parser.add_argument('--velocity_topic', type=str)
+    parser.add_argument('--motion', type=str)
+    args = parser.parse_args()
     try:
-        CSI_Tester_Robot('odom','cmd_vel','linear')
+        CSI_Tester_Robot(args.position_topic,args.velocity_topic,args.motion)
     except rospy.ROSInterruptException:
         pass
