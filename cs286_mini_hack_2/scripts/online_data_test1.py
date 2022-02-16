@@ -78,6 +78,7 @@ if __name__ == '__main__':
         parser.add_argument('--ts', type=int)
         args = parser.parse_args()
         CSI_Tester(args.robot_username, args.robot_ip, 
-                   args.tx_username, args.tx_ip, args.packet_len)
+                   args.tx_username, args.tx_ip, args.packet_len,
+                   args.ts)
     except rospy.ROSInterruptException:
         pass
