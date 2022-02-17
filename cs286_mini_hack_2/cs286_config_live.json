@@ -195,6 +195,14 @@
         "desc":"Trajectory fiile",
         "value":"/cs286_hack_ws/src/WSR-Toolbox-cpp/data/Sample_data/rx_trajectory_2021-06-27_202550_.csv"
     },
+   "input_trajectory_csv_fn_rx_t265":{
+        "desc":"Trajectory fiile",
+        "value":"/Harvard_CS286/cs286_mini_hack_2/rx_displacement_t265.csv"
+    },
+    "input_trajectory_csv_fn_rx_odom":{
+        "desc":"Trajectory fiile",
+        "value":"/Harvard_CS286/cs286_mini_hack_2/rx_displacement_odom.csv"
+    },
     "input_trajectory_csv_fn_tx":{
         "desc":"Trajectory file of TX_Neighbor_robot (WIP)",
         "value":"/cs286_hack_ws/src/csitoolbox/WSR_toolbox_data/bug_36_data/tx_trajectory.csv"
@@ -266,8 +274,8 @@
     "antenna_position_offset": {
         "desc": "offset between center of displacement center and antenna tip (meters)",
         "mocap_offset":[0.0,0.0,0.0],
-        "t265_offset":[0.0,0.0,0.06],
-        "odom_offset":[0.0,0.16,0.14]
+        "t265_offset":[0.09,0.15,0.0],
+        "odom_offset":[0.0,0.15,0.08]
     },
     "get_mean_pose_RX": {
         "desc": "Get mean pose of the RX along its sub-trajectory",

@@ -5,6 +5,7 @@ from std_msgs.msg import Bool
 import subprocess
 import time
 import argparse
+import os
 
 class CSI_Tester:
     def __init__ (self, robot_un, robot_ip, tx_un, tx_ip, packet_len, ts=3):
@@ -13,7 +14,7 @@ class CSI_Tester:
         self.verify_csi_data = Bool()
         self.verify_csi_data.data = True
         rospy.init_node('csi_online_data_test1', anonymous=True)
-
+        self.home_dir = os.path.expanduser('~')
         self.robot_username=robot_un
         self.robot_ip=robot_ip
         self.packet_length=packet_len
@@ -27,7 +28,7 @@ class CSI_Tester:
         if msg.data:
             rospy.loginfo("Received new request.")
             rospy.loginfo("Starting Data colletion...")
-            subprocess.call(['bash', './start_remote_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/start_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.packet_length,
@@ -39,7 +40,7 @@ class CSI_Tester:
             time.sleep(self.data_collection_time) 
             
             #Stop remote csi
-            subprocess.call(['bash', './stop_remote_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/stop_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.tx_node_username,
@@ -50,7 +51,7 @@ class CSI_Tester:
             rospy.loginfo("Data collection done. Fetching data..")
 
             #Fetch csi data
-            subprocess.call(['bash', './collect_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/collect_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.tx_node_username,

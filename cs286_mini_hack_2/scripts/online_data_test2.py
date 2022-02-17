@@ -5,16 +5,19 @@ from std_msgs.msg import Bool
 import subprocess
 import time
 import argparse
+import os
 
 class CSI_Tester:
     def __init__ (self, robot_un, robot_ip, tx_un, tx_ip, packet_len, ts=3):
         self.pub = rospy.Publisher('verify_csi', Bool, queue_size=10)
-        self.sub = rospy.Subscriber('run_test_1', Bool, self.callback)
+        self.pub_aoa = rospy.Publisher('get_aoa', Bool, queue_size=10)
+        self.pub_robot = rospy.Publisher('wsr_move_robot', Bool, queue_size=10)
+        self.sub = rospy.Subscriber('/run_test_2', Bool, self.callback)
         self.verify_csi_data = Bool()
         self.verify_csi_data.data = True
         self.move_robot = Bool()
-        rospy.init_node('csi_online_data_test1', anonymous=True)
-
+        rospy.init_node('csi_online_data_test2', anonymous=True)
+        self.home_dir = os.path.expanduser('~')
         self.robot_username=robot_un
         self.robot_ip=robot_ip
         self.packet_length=packet_len
@@ -28,7 +31,7 @@ class CSI_Tester:
         if msg.data:
             rospy.loginfo("Received new request.")
             rospy.loginfo("Starting Data colletion...")
-            subprocess.call(['bash', './start_remote_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/start_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.packet_length,
@@ -39,16 +42,17 @@ class CSI_Tester:
             rospy.loginfo("Collecting data..")
             #Trigger robot motion
             self.move_robot.data = True
-            self.pub.publish(self.move_robot)
-
+            self.pub_robot.publish(self.move_robot)
+            rospy.loginfo("Robot should start moving")
             time.sleep(self.data_collection_time) 
             
             #Stop robot motion
             self.move_robot.data = False
-            self.pub.publish(self.move_robot)
+            self.pub_robot.publish(self.move_robot)
+            rospy.loginfo("Robot should stop moving")
             
             #Stop remote csi
-            subprocess.call(['bash', './stop_remote_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/stop_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.tx_node_username,
@@ -59,7 +63,7 @@ class CSI_Tester:
             rospy.loginfo("Data collection done. Fetching data..")
 
             #Fetch csi data
-            subprocess.call(['bash', './collect_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/collect_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.tx_node_username,
@@ -71,6 +75,7 @@ class CSI_Tester:
 
             #publish on /verify csi topic
             self.pub.publish(self.verify_csi_data)
+            self.pub_aoa.publish(self.verify_csi_data)
             rospy.loginfo("Passing data to WSR Toolbox for verification...")
 
             time.sleep(10)
