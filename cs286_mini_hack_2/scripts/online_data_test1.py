@@ -17,7 +17,7 @@ class CSI_Tester:
         self.home_dir = os.path.expanduser('~')
         self.robot_username=robot_un
         self.robot_ip=robot_ip
-        self.packet_length=packet_len
+        self.packet_length=packet_len-28 #To avoid using different packet lengths
         self.tx_node_username=tx_un
         self.tx_node_ip=tx_ip
         self.data_collection_time = ts
