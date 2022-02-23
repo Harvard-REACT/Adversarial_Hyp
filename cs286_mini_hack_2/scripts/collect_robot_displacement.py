@@ -12,7 +12,7 @@ class CSI_Tester_Robot:
     def __init__ (self, odom_topic, velocity_topic, motion="linear"):
         self.sub_odom = rospy.Subscriber(odom_topic, Odometry, self.odom_callback)
         self.sub_t265 = rospy.Subscriber('/camera/odom/sample', Odometry, self.t265_callback)
-        self.sub = rospy.Subscriber('run_test_2', Bool, self.callback)
+        self.sub = rospy.Subscriber('wsr_move_robot', Bool, self.callback)
         self.pub_vel = rospy.Publisher(velocity_topic, Twist, queue_size=10)
         self.vel = Twist()
         self.start_data_collection = False
@@ -28,9 +28,9 @@ class CSI_Tester_Robot:
         if (self.start_data_collection):
             
             if(self.motion == "linear"):
-                self.vel.linear.x=0.1
+                self.vel.linear.x=0.2
             else:
-                self.vel.angular.z=0.1
+                self.vel.angular.z=0.5
             
             self.pub_vel.publish(self.vel)
             temp=[]
