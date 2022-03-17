@@ -12,8 +12,8 @@ cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
 sudo ./b2 --with=all -j $cpuCores
 
 echo "Installing Python packages"
-sudo apt install python-catkin-tools python-pip git vim -y
-pip install Cython setuptools numpy pybind11 scipy pandas matplotlib
+#sudo apt install python-catkin-tools python-pip git vim -y
+#pip install Cython setuptools numpy pybind11 scipy pandas matplotlib
 
 echo "Installing WSR Toolbox"
 cd ~/
