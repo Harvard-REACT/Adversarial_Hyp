@@ -15,4 +15,21 @@
     <remap from="/move_base_simple/goal" to="move_base_simple/goal"/>
   </node>
 
+  <node
+    pkg="rtabmap_ros"
+    type="rtabmapviz"
+    name="rtabmapviz"
+    args="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini"
+    output="screen"
+    ns="$(arg robot_name)/rtabmap">
+    <param name="subscribe_rgbd"     value="true"/>
+    <param name="subscribe_scan"     value="true"/>
+    <param name="queue_size"         value="50"/>
+    <param name="frame_id"           value="$(arg robot_name)/base_footprint"/>
+    <param name="odom_frame_id"      value="$(arg robot_name)/odom"/>
+    <param name="wait_for_transform" value="true"/>
+    <remap from="scan"               to="/$(arg robot_name)/scan"/>
+  </node>
+
+
 </launch>
