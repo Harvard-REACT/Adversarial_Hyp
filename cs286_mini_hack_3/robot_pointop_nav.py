@@ -22,20 +22,31 @@ If you want to close, insert 's'
 PI = 3.14
 
 class RobotSLAM_Nav:
-    def __init__(self, goal_topic, position_topic):
+    def __init__(self, goal_topic, position_topic,bot):
         rospy.init_node("move_base_tester")
         self.client = actionlib.SimpleActionClient(goal_topic,MoveBaseAction)
         self.timeout = 60 #secs
         self.step_size = 1.0
         
-        #Clear the costmap and rtabmap using rosservice calls.
-        rospy.wait_for_service('/locobot/rtabmap/reset')
-        reset_map = rospy.ServiceProxy('/locobot/rtabmap/reset', Empty)
-        reset_map()
+        if(bot == 1):
+            #Clear the costmap and rtabmap using rosservice calls.
+            rospy.wait_for_service('/locobot/rtabmap/reset')
+            reset_map = rospy.ServiceProxy('/locobot/rtabmap/reset', Empty)
+            reset_map()
 
-        rospy.wait_for_service('/locobot/move_base/clear_costmaps')
-        clear_costmap = rospy.ServiceProxy('/locobot/move_base/clear_costmaps', Empty)
-        clear_costmap()
+            rospy.wait_for_service('/locobot/move_base/clear_costmaps')
+            clear_costmap = rospy.ServiceProxy('/locobot/move_base/clear_costmaps', Empty)
+            clear_costmap()
+        else:
+            #Clear the costmap and rtabmap using rosservice calls.
+            rospy.wait_for_service('/rtabmap/reset')
+            reset_map = rospy.ServiceProxy('/rtabmap/reset', Empty)
+            reset_map()
+
+            rospy.wait_for_service('/move_base/clear_costmaps')
+            clear_costmap = rospy.ServiceProxy('/move_base/clear_costmaps', Empty)
+            clear_costmap()
+
 
         #Create the actionlib server
         self.client.wait_for_server()
@@ -132,8 +143,9 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Get the inputs.')
     parser.add_argument('--goal_topic', type=str)
     parser.add_argument('--position_topic', type=str)
+    parser.add_argument('--bot', type=int)
     args = parser.parse_args()
-    obj = RobotSLAM_Nav(args.goal_topic, args.position_topic)
+    obj = RobotSLAM_Nav(args.goal_topic, args.position_topic, args.bot)
     
     obj.move()
     #obj.move_along_direction()
