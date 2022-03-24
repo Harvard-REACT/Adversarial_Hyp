@@ -11,8 +11,8 @@
   <arg name="localization"    default="false" doc="Localization mode for navigation"/>
   <arg name="database_path"   default="rtabmap.db"/>
   <arg name="rviz"            default="false"/>
-  <arg name="rate"            default="1.0"/>
-
+  <arg name="rate"            default="2.0"/>
+  <arg name="use_rtabmap"     default="true"/>
   <arg     if="$(arg localization)" name="rtabmap_args"  default=""/>
   <arg unless="$(arg localization)" name="rtabmap_args"  default="--delete_db_on_start"/>
 
@@ -32,7 +32,7 @@
 
  <!-- RTAB=Map node -->
 <group ns="rtabmap">
-    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)">
+    <node if="$(arg use_rtabmap)" name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg rtabmap_args)">
 
       <param name="database_path"       type="string" value="$(arg database_path)"/>
       <param name="frame_id"            type="string" value="base_link"/>

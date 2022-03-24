@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install ros-$ROS_DISTRO-libg2o ros-$ROS_DISTRO-libpointmatcher ros-$ROS_DISTRO-joint-state-publisher-gui ros-$ROS_DISTRO-pcl-ros python-catkin-tools ros-$ROS_DISTRO-turtlebot3-descriptions
+sudo apt install ros-$ROS_DISTRO-libg2o ros-$ROS_DISTRO-libpointmatcher ros-$ROS_DISTRO-joint-state-publisher-gui ros-$ROS_DISTRO-pcl-ros python-catkin-tools ros-$ROS_DISTRO-turtlebot3-description -y
 
 sudo apt remove ros-$ROS_DISTRO-rtabmap-ros ros-$ROS_DISTRO-rtabmap -y
 
@@ -49,3 +49,7 @@ echo "All Packages are Installed."
 
 cd ~/
 source ~/.bashrc
+
+sudo apt remove ros-$ROS_DISTRO-rtabmap -y
+source ~/.bashrc
+
