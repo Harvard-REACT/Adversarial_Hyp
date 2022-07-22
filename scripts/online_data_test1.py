@@ -28,7 +28,7 @@ class CSI_Tester:
         if msg.data:
             rospy.loginfo("Received new request.")
             rospy.loginfo("Starting Data colletion...")
-            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/start_remote_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Adversarial_Hyp/scripts/start_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.packet_length,
@@ -40,7 +40,7 @@ class CSI_Tester:
             time.sleep(self.data_collection_time) 
             
             #Stop remote csi
-            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/stop_remote_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Adversarial_Hyp/scripts/stop_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.tx_node_username,
@@ -51,7 +51,7 @@ class CSI_Tester:
             rospy.loginfo("Data collection done. Fetching data..")
 
             #Fetch csi data
-            subprocess.call(['bash', self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/scripts/collect_csi.sh', 
+            subprocess.call(['bash', self.home_dir+'/Adversarial_Hyp/scripts/collect_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
                             self.tx_node_username,
