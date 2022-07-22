@@ -80,11 +80,11 @@ class CSI_Tester_Robot:
         else:
             self.start_data_collection = False
             self.pub_vel.publish(Twist())
-            with open(self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/rx_displacement_odom.csv','w') as f:
+            with open(self.home_dir+'/Adversarial_Hyp/data/traj/rx_displacement_odom.csv','w') as f:
                 write = csv.writer(f)
                 write.writerows(self.odom_displacement)
 
-            with open(self.home_dir+'/Harvard_CS286/cs286_mini_hack_2/rx_displacement_t265.csv','w') as f:
+            with open(self.home_dir+'/Adversarial_Hyp/data/traj/rx_displacement_t265.csv','w') as f:
                 write = csv.writer(f)
                 write.writerows(self.t265_displacement)
 
