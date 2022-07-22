@@ -179,37 +179,45 @@
         "desc":"Forward channel csi File for each of the neighboring TX robots",
         "value":{
             "tx1":{
-                "mac_id":"00:21:6A:CA:ED:78",
-                "csi_fn":"/Harvard_CS286/cs286_mini_hack_2/csi_tx1.dat"
+                "mac_id":"08:BE:AC:11:A0:A9",
+                "csi_fn":"/Adversarial_Hyp/data/csi_tx1.dat"
+            }
+            "tx2":{
+                "mac_id":"08:BE:AC:11:A0:5F",
+                "csi_fn":"/Adversarial_Hyp/data/csi_tx2.dat"
+            }
+            "tx3":{
+                "mac_id":"08:BE:AC:12:0E:16",
+                "csi_fn":"/Adversarial_Hyp/data/csi_tx3.dat"
             }
         }
     },
     "input_RX_channel_csi_fn":{
         "desc":"Reverse channel csi File stored on the RX robot which is performing 3D SAR",
         "value":{           
-            "mac_id":"00:21:6A:CA:F9:60",
-            "csi_fn":"/Harvard_CS286/cs286_mini_hack_2/csi_rx1.dat"
+            "mac_id":"08:BE:AC:11:A1:39",
+            "csi_fn":"/Adversarial_Hyp/data/csi_rx1.dat"
         }
     },
     "input_trajectory_csv_fn_rx":{
         "desc":"Trajectory fiile",
-        "value":"/cs286_hack_ws/src/WSR-Toolbox-cpp/data/Sample_data/rx_trajectory_2021-06-27_202550_.csv"
+        "value":"/Adversarial_Hyp/data/rx_trajectory_2021-06-27_202550_.csv"
     },
    "input_trajectory_csv_fn_rx_t265":{
         "desc":"Trajectory fiile",
-        "value":"/Harvard_CS286/cs286_mini_hack_2/rx_displacement_t265.csv"
+        "value":"/Adversarial_Hyp/data/rx_displacement_t265.csv"
     },
     "input_trajectory_csv_fn_rx_odom":{
         "desc":"Trajectory fiile",
-        "value":"/Harvard_CS286/cs286_mini_hack_2/rx_displacement_odom.csv"
+        "value":"/Adversarial_Hyp/data/rx_displacement_odom.csv"
     },
     "input_trajectory_csv_fn_tx":{
         "desc":"Trajectory file of TX_Neighbor_robot (WIP)",
-        "value":"/cs286_hack_ws/src/csitoolbox/WSR_toolbox_data/bug_36_data/tx_trajectory.csv"
+        "value":"/Adversarial_Hyp/data/tx_trajectory.csv"
     },
     "output_aoa_profile_path":{
         "desc":"AOA profile",
-        "value":"/cs286_hack_ws/src/WSR-Toolbox-cpp/debug"
+        "value":"/Adversarial_Hyp/data"
     },
     "max_packets_to_process":{
         "desc":"Maximum number of csi packets to process",
@@ -229,7 +237,7 @@
     },
     "debug_dir":{
         "desc":"dir to save intermediate data files for debugging",
-        "value":"/cs286_hack_ws/src/WSR-Toolbox-cpp/debug"
+        "value":"/Adversarial_Hyp/data/debug"
     },
     "use_relative_trajectory":{
         "desc":"Flag to enable/disbale usage of relative trajectory",
@@ -237,11 +245,11 @@
     },
     "input_dir":{
         "desc":"AOA profile",
-        "value":"/WSR_Project/WSR-Toolbox-cpp/data"
+        "value":"/Adversarial_Hyp/data"
     },    
     "output_dir":{
         "desc":"AOA profile",
-        "value":"/WSR_Project/WSR-Toolbox-cpp/data"
+        "value":"/Adversarial_Hyp/data"
     },
     "multi_threading":{
         "desc":"Enable multi-threading during AOA profile calculation",
