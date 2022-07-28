@@ -14,7 +14,7 @@
 #$12 remote bot tx3 ip
 
 
-dir_path="${HOME}/Adversarial_Hyp/data
+dir_path="${HOME}/Adversarial_Hyp/data"
 
 #Remove old data
 rm -rf $dir_path/csi_rx1.dat
