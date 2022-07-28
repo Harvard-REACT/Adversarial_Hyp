@@ -8,7 +8,7 @@ import argparse
 import os
 
 class Alpha_Calculator:
-    def __init__ (self, tx_un):
+    def __init__ (self):
         self.pub_change_alpha_flag = rospy.Publisher('alpha_flag', Bool, queue_size=10)    
         self.sub_start_alpha_calculation = rospy.Subscriber('start_alpha_calculation', Bool, self.calculate_alpha)
         rospy.loginfo("Waiting for new request...")
@@ -25,9 +25,9 @@ class Alpha_Calculator:
 
 if __name__ == '__main__':
     try:
-        parser = argparse.ArgumentParser(description='Get the inputs.')
-        parser.add_argument('--tx_username', type=str)
-        args = parser.parse_args()
-        Alpha_Calculator(args.tx_username)
+        #parser = argparse.ArgumentParser(description='Get the inputs.')
+        #parser.add_argument('--tx_username', type=str)
+        #args = parser.parse_args()
+        #Alpha_Calculator(args.tx_username)
     except rospy.ROSInterruptException:
         pass
