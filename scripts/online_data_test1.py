@@ -8,7 +8,7 @@ import argparse
 import os
 
 class CSI_Tester:
-    def __init__ (self, robot_un, robot_ip, tx_un, tx_ip, packet_len, ts=3):
+    def __init__ (self, robot_un, robot_ip, tx1_un, tx1_ip, tx2_un, tx2_ip, tx3_un, tx3_ip, packet_len, ts=3):
         #self.pub = rospy.Publisher('verify_csi', Bool, queue_size=10)
         #self.sub = rospy.Subscriber('run_test_1', Bool, self.callback)
         self.pub_collection = rospy.Publisher('start_collection', Bool, queue_size=10)
@@ -30,8 +30,12 @@ class CSI_Tester:
         self.robot_username=robot_un
         self.robot_ip=robot_ip
         self.packet_length=str(int(packet_len)-28) #To avoid using different packet lengths
-        self.tx_node_username=tx_un
-        self.tx_node_ip=tx_ip
+        self.tx_node1_username=tx1_un
+        self.tx_node1_ip=tx1_ip
+        self.tx_node2_username=tx2_un
+        self.tx_node2_ip=tx2_ip
+        self.tx_node3_username=tx3_un
+        self.tx_node3_ip=tx3_ip
         self.data_collection_time = ts
         rospy.loginfo("Waiting for new request...")
         rospy.spin()
@@ -44,8 +48,12 @@ class CSI_Tester:
                             self.robot_username,
                             self.robot_ip,
                             self.packet_length,
-                            self.tx_node_username,
-                            self.tx_node_ip])
+                            self.tx_node1_username,
+                            self.tx_node1_ip,
+                            self.tx_node2_username,
+                            self.tx_node2_ip,
+                            self.tx_node3_username,
+                            self.tx_node3_ip])
 
             #Wait for 5 seconds to collect data
             rospy.loginfo("Collecting data..")
@@ -55,8 +63,12 @@ class CSI_Tester:
             subprocess.call(['bash', self.home_dir+'/Adversarial_Hyp/scripts/stop_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
-                            self.tx_node_username,
-                            self.tx_node_ip])
+                            self.tx_node1_username,
+                            self.tx_node1_ip,
+                            self.tx_node2_username,
+                            self.tx_node2_ip,
+                            self.tx_node3_username,
+                            self.tx_node3_ip])
 
             #wait for 1 second
             time.sleep(1)
@@ -65,8 +77,12 @@ class CSI_Tester:
             subprocess.call(['bash', self.home_dir+'/Adversarial_Hyp/scripts/collect_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
-                            self.tx_node_username,
-                            self.tx_node_ip])
+                            self.tx_node1_username,
+                            self.tx_node1_ip,
+                            self.tx_node2_username,
+                            self.tx_node2_ip,
+                            self.tx_node3_username,
+                            self.tx_node3_ip])
 
             #wait for 2 seconds
             time.sleep(1)
@@ -80,8 +96,12 @@ class CSI_Tester:
                             self.robot_username,
                             self.robot_ip,
                             self.packet_length,
-                            self.tx_node_username,
-                            self.tx_node_ip])
+                            self.tx_node1_username,
+                            self.tx_node1_ip,
+                            self.tx_node2_username,
+                            self.tx_node2_ip,
+                            self.tx_node3_username,
+                            self.tx_node3_ip])
 
             #Wait for 5 seconds to collect data
             rospy.loginfo("Collecting data..")
@@ -91,8 +111,12 @@ class CSI_Tester:
             subprocess.call(['bash', self.home_dir+'/Adversarial_Hyp/scripts/stop_remote_csi.sh', 
                             self.robot_username,
                             self.robot_ip,
-                            self.tx_node_username,
-                            self.tx_node_ip])
+                            self.tx_node1_username,
+                            self.tx_node1_ip,
+                            self.tx_node2_username,
+                            self.tx_node2_ip,
+                            self.tx_node3_username,
+                            self.tx_node3_ip])
 
             #wait for 1 second
             time.sleep(1)
@@ -110,8 +134,12 @@ class CSI_Tester:
                 subprocess.call(['bash', self.home_dir+'/Adversarial_Hyp/scripts/collect_csi.sh', 
                                 self.robot_username,
                                 self.robot_ip,
-                                self.tx_node_username,
-                                self.tx_node_ip])
+                                self.tx_node1_username,
+                                self.tx_node1_ip,
+                                self.tx_node2_username,
+                                self.tx_node2_ip,
+                                self.tx_node3_username,
+                                self.tx_node3_ip])
 
                 #wait for 2 seconds
                 time.sleep(2)
@@ -141,13 +169,19 @@ if __name__ == '__main__':
         parser = argparse.ArgumentParser(description='Get the inputs.')
         parser.add_argument('--robot_username', type=str)
         parser.add_argument('--robot_ip', type=str)
-        parser.add_argument('--tx_username', type=str)
-        parser.add_argument('--tx_ip', type=str)
+        parser.add_argument('--tx1_username', type=str)
+        parser.add_argument('--tx1_ip', type=str)
+        parser.add_argument('--tx2_username', type=str)
+        parser.add_argument('--tx2_ip', type=str)
+        parser.add_argument('--tx3_username', type=str)
+        parser.add_argument('--tx3_ip', type=str)
         parser.add_argument('--packet_len', type=str)
         parser.add_argument('--ts', type=int)
         args = parser.parse_args()
         CSI_Tester(args.robot_username, args.robot_ip, 
-                   args.tx_username, args.tx_ip, args.packet_len,
-                   args.ts)
+                   args.tx1_username, args.tx1_ip,
+                   args.tx2_username, args.tx2_ip,
+                   args.tx3_username, args.tx3_ip,
+                   args.packet_len, args.ts)
     except rospy.ROSInterruptException:
         pass
