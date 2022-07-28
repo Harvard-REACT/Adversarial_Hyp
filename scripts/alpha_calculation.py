@@ -28,6 +28,6 @@ if __name__ == '__main__':
         #parser = argparse.ArgumentParser(description='Get the inputs.')
         #parser.add_argument('--tx_username', type=str)
         #args = parser.parse_args()
-        #Alpha_Calculator(args.tx_username)
+        Alpha_Calculator()
     except rospy.ROSInterruptException:
         pass
