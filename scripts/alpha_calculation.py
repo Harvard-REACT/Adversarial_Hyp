@@ -11,6 +11,7 @@ class Alpha_Calculator:
     def __init__ (self):
         self.pub_change_alpha_flag = rospy.Publisher('alpha_flag', Bool, queue_size=10)    
         self.sub_start_alpha_calculation = rospy.Subscriber('start_alpha_calculation', Bool, self.calculate_alpha)
+        rospy.init_node('alpha_calculation_node')
         rospy.loginfo("Waiting for new request...")
         rospy.spin()
         
