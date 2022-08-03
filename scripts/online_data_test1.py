@@ -29,7 +29,7 @@ class CSI_Tester:
         self.home_dir = os.path.expanduser('~')
         self.robot_username=robot_un
         self.robot_ip=robot_ip
-        self.packet_length=str(int(packet_len)-28) #To avoid using different packet lengths
+        self.packet_length=packet_len #this is actually number of tx robots :)
         self.tx_node1_username=tx1_un
         self.tx_node1_ip=tx1_ip
         self.tx_node2_username=tx2_un
@@ -175,13 +175,13 @@ if __name__ == '__main__':
         parser.add_argument('--tx2_ip', type=str)
         parser.add_argument('--tx3_username', type=str)
         parser.add_argument('--tx3_ip', type=str)
-        parser.add_argument('--packet_len', type=str)
+        parser.add_argument('--num_tx_robots', type=str)
         parser.add_argument('--ts', type=int)
         args = parser.parse_args()
         CSI_Tester(args.robot_username, args.robot_ip, 
                    args.tx1_username, args.tx1_ip,
                    args.tx2_username, args.tx2_ip,
                    args.tx3_username, args.tx3_ip,
-                   args.packet_len, args.ts)
+                   args.num_tx_robots, args.ts)
     except rospy.ROSInterruptException:
         pass
