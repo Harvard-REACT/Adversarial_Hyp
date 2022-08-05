@@ -181,17 +181,17 @@
             "tx0":{
                 "mac_id_val":"00:16:EA:12:34:56",
                 "mac_id":"08:BE:AC:11:A0:A9",
-                "csi_fn":"/home/eren/Adversarial_Hyp/data/tx1.dat"
+                "csi_fn":"/home/eren/Adversarial_Hyp/data/csi_tx1.dat"
             },
             "tx1":{
                 "mac_id_val":"0:33:106:62:245:126",
                 "mac_id":"08:BE:AC:12:0E:16",
-                "csi_fn":"/home/eren/Adversarial_Hyp/data/tx2.dat"
+                "csi_fn":"/home/eren/Adversarial_Hyp/data/csi_tx2.dat"
                 },
             "tx2":{
                 "mac_id_val":"0:33:106:63:23:90",
                 "mac_id":"08:BE:AC:12:0E:15",
-                "csi_fn":"/home/eren/Adversarial_Hyp/data/tx3.dat"
+                "csi_fn":"/home/eren/Adversarial_Hyp/data/csi_tx3.dat"
             }
         }
     },
@@ -200,7 +200,7 @@
         "value":{           
             "mac_id":"08:BE:AC:11:A0:5F",
             "mac_id_val":"00:16:EA:12:34:56",
-            "csi_fn":"/home/eren/Adversarial_Hyp/data/rx1.dat"
+            "csi_fn":"/home/eren/Adversarial_Hyp/data/csi_rx1.dat"
         }
     },
     "input_trajectory_csv_fn_rx":{
