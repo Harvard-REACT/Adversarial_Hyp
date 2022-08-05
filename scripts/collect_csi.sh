@@ -25,7 +25,7 @@ scp -r $5@$6:~/Adversarial_Hyp/data/csi_tx2.dat $dir_path/ &
 scp -r $7@$8:~/Adversarial_Hyp/data/csi_tx3.dat $dir_path/ &
 
 #Get data from RX SAR Robot
-scp -r $1@$2:~/Adversarial_Hyp/data/csi_rx1.dat $dir_path/
+scp -r $1@$2:~/Adversarial_Hyp/data/csi_rx1.dat $dir_path/ &
 scp -r $1@$2:~/Adversarial_Hyp/data/rx_traj.csv $dir_path/
 
 sleep 1
