@@ -17,7 +17,7 @@ rm -rf $dir_path/csi_rx1.dat
 rm -rf $dir_path/csi_tx1.dat
 rm -rf $dir_path/csi_tx2.dat
 rm -rf $dir_path/csi_tx3.dat
-rm -r $dir_path/traj
+rm -rf $dir_path/rx_traj.csv
 
 #Get data from TX Robot
 scp -r $3@$4:~/Adversarial_Hyp/data/csi_tx1.dat $dir_path/ &
@@ -26,9 +26,7 @@ scp -r $7@$8:~/Adversarial_Hyp/data/csi_tx3.dat $dir_path/ &
 
 #Get data from RX SAR Robot
 scp -r $1@$2:~/Adversarial_Hyp/data/csi_rx1.dat $dir_path/
-
-#Get data from OptiTrack data from Local Machine?
-scp -r ~/Adversarial_Hyp/data/traj
+scp -r $1@$2:~/Adversarial_Hyp/data/rx_traj.csv $dir_path/
 
 sleep 1
 
@@ -39,7 +37,4 @@ cp $dir_path/csi_rx1.dat $dir_path/backup_data/csi_rx1_$timestamp.dat
 cp $dir_path/csi_tx1.dat $dir_path/backup_data/csi_tx1_$timestamp.dat
 cp $dir_path/csi_tx2.dat $dir_path/backup_data/csi_tx2_$timestamp.dat
 cp $dir_path/csi_tx3.dat $dir_path/backup_data/csi_tx3_$timestamp.dat
-cp $dir_path/traj/rx_trajectory.csv $dir_path/traj_backup_data/rx_trajectory_${timestamp}_.csv
-cp $dir_path/traj/tx1_trajectory.csv $dir_path/traj_backup_data/tx1_trajectory_${timestamp}_.csv
-cp $dir_path/traj/tx2_trajectory.csv $dir_path/traj_backup_data/tx2_trajectory_${timestamp}_.csv
-cp $dir_path/traj/tx3_trajectory.csv $dir_path/traj_backup_data/tx3_trajectory_${timestamp}_.csv
+cp $dir_path/rx_traj.csv $dir_path/backup_data/rx_traj_${timestamp}_.csv
