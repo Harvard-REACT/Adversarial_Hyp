@@ -8,3 +8,7 @@ echo "abc123" | sudo -S ${HOME}/WSR-Toolbox-linux-80211n-csitool-supplementary/n
 #sleep 0.5
 
 echo "abc123" | sudo -S ${HOME}/WSR-Toolbox-linux-80211n-csitool-supplementary/injection_multiple/random_packets_multiple 10000 35 1 7500 $2 & #Only send forward packets
+
+echo "abc123" | sudo rm ${HOME}/Adversarial_Hyp/data/rx_traj.csv
+
+python ${HOME}/Adversarial_Hyp/scripts/traj_writer.py
