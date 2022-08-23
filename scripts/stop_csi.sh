@@ -2,3 +2,4 @@
 echo "abc123" | sudo -S killall log_to_file
 #echo "abc123" | sudo -S killall random_packets
 #rosnode kill traj_writer
+# ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDdnToCSRaPt3TAMBksA93D5H7alSYBAMQYIyJw9YjJtjkpcb1NqRNs7TqqIgz15+Y/SbhRb4lXUxxP04v7K+cjjmvkLiIKpWA2fzzTOV8P1xIaPRbmY9FJxb//Wk81kpXAYxdZZpCVt12zeNG5Q/EAAGZPTh4NwIhyR8YCyue0HZEt1sceJUG9fikF8zAi9RCRSc7r0XjABwgk3SRUylyu/f7F5/IjW/3M9fAZAVgYQW7JEeGhMH4zfdvp5GT47i4xKatuTckhZNouaLs17gyMJo2R9tWL+hV3HrczpjRf5VZsq+1z5iRoTA4+lIfQI0FOMDTLzTNTboQS7wyB3uWj eren@ubuntu
